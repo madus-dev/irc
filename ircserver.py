@@ -24,35 +24,40 @@ def message_thread(y):
         vars()['t'+ str(i)] = threading.Thread(target = connection_thread)
         vars()['t'+ str(i)].start()
         print('starting messaging thread...')
-        x = ip_arr[y - 1]
         while True:
+            global ip_arr
 
 
-            (data,address) = x.recvfrom(4096)
+            (data,address) = ip_arr[y - 1].recvfrom(4096)
 
             
 
-            print(str(data.decode('utf-8')),x)
+            print(str(data.decode('utf-8')))
+            for f in ip_arr:
+                if f != ip_arr[y - 1]:
+                    f.send(data)
                 
                 
 def connection_thread():
     global ip_arr
     global i
+    global p
     while True:
 
         
         # Establish connection with client. 
         c, addr = s.accept()
         
-        print('Got connection from', addr) 
+        print('Got connection from', addr)
+
       
          # send a thank you message to the client.  
         c.send(b'Connected...')
         break
     ip_arr.append(c)
     i += 1
-    print(i)
-    print(ip_arr)
+
+
     message_thread(i)
 connection_thread()
     
