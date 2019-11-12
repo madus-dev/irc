@@ -35,8 +35,8 @@ def message_thread(y):
 
             print(str(data.decode('utf-8')))
             for f in ip_arr:
-                #if f != ip_arr[y - 1]:
-                f.send(data)
+                if f != ip_arr[y - 1]:
+                    f.send(data)
                 
                 
                 
