@@ -2,20 +2,19 @@ import socket
 import threading
 import sys
 import time
+import select
   
 
-s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)          
-  
+s = socket.socket()
+
 
 port = 10697               
-  
+
 print_lock = threading.Lock()
-s.connect(('192.168.0.32', port)) 
-  
+s.connect(('192.168.0.32', port))
 
-
+s.setblocking(1)
 print (s.recv(1024).decode('utf-8'))
-
 def sending_thread():
     while True:
         data = input('')
@@ -30,9 +29,12 @@ t.start()
 
 
 while True:
-    z = s.recv(1024).decode('utf-8')
-        
-    print(z)
+    (ready,_,_) = select.select([s], [], [],5)
+    if (ready):
+    
+        print(s.recv(1024))
+       
+
         
         
 
