@@ -30,13 +30,20 @@ def message_thread(y):
 
 
             (data,address) = ip_arr[y - 1].recvfrom(4096)
-
+            # if there is no longer a connection stop thread and remove ip from array
             
 
             print(str(data.decode('utf-8')))
+            temp = data.decode('utf-8')
+            temp2 = temp.split(' ')
             for f in ip_arr:
-                #if f != ip_arr[y - 1]:
-                f.send(data)
+                try:
+                    f.send(data)
+                except:
+                    pass
+            if temp2[1] == 'Disconnected':
+                vars()['t' + str(y)].join()
+
                 
                 
                 
