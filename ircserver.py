@@ -33,9 +33,11 @@ def message_thread(y):
             # if there is no longer a connection stop thread and remove ip from array
             
 
-            print(str(data.decode('utf-8')))
+            
             temp = data.decode('utf-8')
             temp2 = temp.split(' ')
+            if temp2[0] != 'vkp13e':
+                print(temp)
             for f in ip_arr:
                 try:
                     f.send(data)
@@ -61,7 +63,7 @@ def connection_thread():
 
       
          # send a thank you message to the client.  
-        c.send(b'Connected...')
+        c.send(b'Connected...\n')
         break
     ip_arr.append(c)
     i += 1
