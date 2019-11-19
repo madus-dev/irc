@@ -6,9 +6,24 @@ import select
 from tkinter import *
 from tkinter import scrolledtext
 
+def query():
+    pass
+    #check if the username is in your sql database with the correct password and se that as the username then set server_ip to selected ip
+    #if username isnt in database print an error message and offer acount creation
+#log in loop
+log_in = Tk()
+log_in.geometry("400x250")  
+name = Label(log_in, text = "Username:").place(x = 30,y = 50)
+Pass = Label(log_in, text = "Password:").place(x = 31,y = 100)
+ip = Label(log_in,text = "Server IP:").place(x = 31,y = 150)
+username = Entry(log_in).place(x = 100, y = 50)
+password = Entry(log_in).place(x = 100, y = 100)
+serverIp = Entry(log_in).place(x = 100, y = 150)
+login_butt = Button(log_in,text = "Submit", command=query).place(x = 132, y = 200)
+log_in.mainloop()
 
-username = 'user'
-server_ip = '192.168.0.32'
+username = ''
+server_ip = '192.168.0.37'
 s = socket.socket()
 
 #server port
